@@ -31,10 +31,10 @@ class World(object):
         self.size = size
         self.world = np.zeros(size)
         # Fill in the indexes gaps to add walls to the grid world
-        self.world[] = self.WALL
-        self.world[] = self.WALL
-        self.world[] = self.WALL
-        self.world[] = self.WALL
+        self.world[0,:] = self.WALL
+        self.world[-1,:] = self.WALL
+        self.world[:,0] = self.WALL
+        self.world[:,-1] = self.WALL
         # Get available positions for placing food (choose all positions where world block = 0)
         self.available_food_positions = set(zip(*np.where(self.world == 0)))
         # Init snake
@@ -48,7 +48,7 @@ class World(object):
         """
         if not self.custom:
             # choose a random position between [SNAKE_SIZE and SIZE - SNAKE_SIZE]
-            start_position = 
+            start_position = (np.random.randint(0,SIZE[0] - SNAKE_SIZE), np.random.randint(0,(SIZE[1] - SNAKE_SIZE))
             # choose a random direction index
             start_direction_index = np.random.randint(0,4)
             new_snake = Snake(start_position, start_direction_index, SNAKE_SIZE)
@@ -62,10 +62,10 @@ class World(object):
         """
         snake = self.snake if self.snake.alive else None
         # Update available positions for food placement considering snake location
-        available_food_positions =
+        available_food_positions = set(zip(*np.where(self.world == 0))) - set(Snake.blocks)
         if not self.custom:
             # Choose a random position from available
-            chosen_position =
+            chosen_position = list(available_food_positions)[np.random.randint(len(available_food_positions))]
         else:
             chosen_position = self.food_position
             # Code needed for checking your project. Just leave it as it is
