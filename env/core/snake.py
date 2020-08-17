@@ -28,12 +28,8 @@ class Snake:
         @param action: int
         @param return: tuple, tuple
         """
-        ## define opposite direction
-        opposite_index = {0:2, 1:3, 2:0, 3:1}
-        opposite_direction_index = opposite_index.get(self.current_direction_index)
-
         # Check if action can be performed (do nothing if in the same direction or opposite)
-        if (action != self.current_direction_index) and (action != opposite_direction_index):
+        if (action != self.current_direction_index) and (action != (self.current_direction_index + 2) % 4):
             self.current_direction_index = action
         # Remove tail
         tail = self.blocks[-1]
