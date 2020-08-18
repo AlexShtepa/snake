@@ -48,9 +48,9 @@ class World(object):
         """
         if not self.custom:
             # choose a random position between [SNAKE_SIZE and SIZE - SNAKE_SIZE]
-            start_position = (np.random.randint(0,SIZE[0] - SNAKE_SIZE), np.random.randint(0,(SIZE[1] - SNAKE_SIZE))
+            start_position = (np.random.randint(0,self.size[0] - SNAKE_SIZE), np.random.randint(0,(self.size[1] - SNAKE_SIZE)))
             # choose a random direction index
-            start_direction_index = random.randint(0,4)
+            start_direction_index = np.random.randint(0,4)
             new_snake = Snake(start_position, start_direction_index, SNAKE_SIZE)
         else:
             new_snake = Snake(self.start_position, self.start_direction_index, SNAKE_SIZE)
@@ -114,6 +114,7 @@ class World(object):
             if self.world[new_snake_head] == self.FOOD:
                 # Remove old food
                 self.world[new_snake_head] = 0
+                self.food_position = None
                 # Add tail again
                 self.snake.blocks.append(old_snake_tail)
                 # Request to place new food

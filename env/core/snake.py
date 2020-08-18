@@ -11,7 +11,7 @@ class Snake:
         @param length: int
         """
         # Information snake need to know to make the move
-                self.snake_block = SNAKE_BLOCK
+        self.snake_block = SNAKE_BLOCK
         self.current_direction_index = direction_index
                 # Alive identifier
         self.alive = True
@@ -33,7 +33,7 @@ class Snake:
             self.current_direction_index = action
         # Remove tail
         tail = self.blocks[-1]
-        self.blocks = self.blocks.remove(tail)
+        self.blocks.remove(tail)
         # Check new head
         new_head = tuple(np.array(self.blocks[0]) + DIRECTIONS[self.current_direction_index])
         # Add new head
