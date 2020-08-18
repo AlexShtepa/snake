@@ -57,7 +57,9 @@ class SnakeEnv(gym.Env):
         # Perform the action
             reward, done, snake = self.world.move_snake(action)
         # Disable interactions if snake dead
-            return self.world.get_observation(), reward, done, snake
+        else:
+            done = True
+        return self.world.get_observation(), reward, done, snake
 
     def reset(self, ):
         """
