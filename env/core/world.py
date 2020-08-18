@@ -105,17 +105,17 @@ class World(object):
             # perform a step (from Snake class)
             new_snake_head, old_snake_tail = self.snake.step(action)
             # Check if snake is outside bounds
-            if new_snake_head :
+            if new_snake_head in set(zip(*np.where(self.world == 255))):
                 self.snake.alive = False
             # Check if snake eats itself
-            elif:
+            elif new_snake_head in self.snake.blocks[1:]:
                 self.snake.alive = False
             #  Check if snake eats the food
-            if:
+            if self.world[new_snake_head] == self.FOOD:
                 # Remove old food
-
+                self.world[new_snake_head] = 0
                 # Add tail again
-
+                self.snake.blocks.append(old_snake_tail)
                 # Request to place new food
                 new_food_needed = self.init_food()
                 reward =self.EAT_REWARD
