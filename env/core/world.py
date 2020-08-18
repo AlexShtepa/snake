@@ -117,7 +117,7 @@ class World(object):
                 # Add tail again
                 self.snake.blocks.append(old_snake_tail)
                 # Request to place new food
-                new_food_needed = self.init_food()
+                new_food_needed = True
                 reward =self.EAT_REWARD
             elif self.snake.alive:
                 # Didn't eat anything, move reward
