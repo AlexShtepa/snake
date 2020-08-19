@@ -66,6 +66,7 @@ class World(object):
         if not self.custom:
             # Choose a random position from available
             chosen_position = list(available_food_positions)[np.random.randint(len(available_food_positions))]
+            self.food_position = chosen_position
         else:
             chosen_position = self.food_position
             # Code needed for checking your project. Just leave it as it is
