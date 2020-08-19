@@ -31,10 +31,10 @@ class World(object):
         self.size = size
         self.world = np.zeros(size)
         # Fill in the indexes gaps to add walls to the grid world
-        self.world[0,:] = self.WALL
-        self.world[-1,:] = self.WALL
-        self.world[:,0] = self.WALL
-        self.world[:,-1] = self.WALL
+        self.world[0, :] = self.WALL
+        self.world[-1, :] = self.WALL
+        self.world[:, 0] = self.WALL
+        self.world[:, -1] = self.WALL
         # Get available positions for placing food (choose all positions where world block = 0)
         self.available_food_positions = set(zip(*np.where(self.world == 0)))
         # Init snake
@@ -48,9 +48,10 @@ class World(object):
         """
         if not self.custom:
             # choose a random position between [SNAKE_SIZE and SIZE - SNAKE_SIZE]
-            start_position = (np.random.randint(0,self.size[0] - SNAKE_SIZE), np.random.randint(0,(self.size[1] - SNAKE_SIZE)))
+            start_position = (
+            np.random.randint(0, self.size[0] - SNAKE_SIZE), np.random.randint(0, (self.size[1] - SNAKE_SIZE)))
             # choose a random direction index
-            start_direction_index = np.random.randint(0,4)
+            start_direction_index = np.random.randint(0, 4)
             new_snake = Snake(start_position, start_direction_index, SNAKE_SIZE)
         else:
             new_snake = Snake(self.start_position, self.start_direction_index, SNAKE_SIZE)
@@ -88,7 +89,7 @@ class World(object):
         if snake:
             for block in snake.blocks:
                 obs[block[0], block[1]] = snake.snake_block
-                        # snakes head
+                # snakes head
             obs[snake.blocks[0][0], snake.blocks[0][1]] = snake.snake_block + 1
         return obs
 
@@ -105,7 +106,7 @@ class World(object):
             # perform a step (from Snake class)
             new_snake_head, old_snake_tail = self.snake.step(action)
             # Check if snake is outside bounds
-            if new_snake_head in set(zip(*np.where(self.world == 255))):
+            if self.world[new_snake_head] == self.WALL:
                 self.snake.alive = False
             # Check if snake eats itself
             elif new_snake_head in self.snake.blocks[1:]:
@@ -119,7 +120,7 @@ class World(object):
                 self.snake.blocks.append(old_snake_tail)
                 # Request to place new food
                 new_food_needed = True
-                reward =self.EAT_REWARD
+                reward = self.EAT_REWARD
             elif self.snake.alive:
                 # Didn't eat anything, move reward
                 reward = self.MOVE_REWARD

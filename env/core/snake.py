@@ -13,7 +13,7 @@ class Snake:
         # Information snake need to know to make the move
         self.snake_block = SNAKE_BLOCK
         self.current_direction_index = direction_index
-                # Alive identifier
+        # Alive identifier
         self.alive = True
         # Place the snake
         self.blocks = [head_position]
