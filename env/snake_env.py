@@ -91,6 +91,7 @@ class SnakeEnv(gym.Env):
             """
             Close rendering
             """
+            pass
 
         if self.renderer:
             self.renderer.close()
