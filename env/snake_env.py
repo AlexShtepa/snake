@@ -53,12 +53,10 @@ class SnakeEnv(gym.Env):
         @return: np.array (observation after the action), int (reward), bool ('done' flag), np.array (snake)
         """
         # Check if game is ended
-        if self.alive:
+
         # Perform the action
-            reward, done, snake = self.world.move_snake(action)
+        reward, done, snake = self.world.move_snake(action)
         # Disable interactions if snake dead
-        else:
-            done = True
         return self.world.get_observation(), reward, done, snake
 
     def reset(self, ):
