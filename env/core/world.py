@@ -48,8 +48,7 @@ class World(object):
         """
         if not self.custom:
             # choose a random position between [SNAKE_SIZE and SIZE - SNAKE_SIZE]
-            start_position = (
-            np.random.randint(0, self.size[0] - SNAKE_SIZE), np.random.randint(0, (self.size[1] - SNAKE_SIZE)))
+            start_position = (np.random.randint(0, self.size[0] - SNAKE_SIZE), np.random.randint(0, (self.size[1] - SNAKE_SIZE)))
             # choose a random direction index
             start_direction_index = np.random.randint(0, 4)
             new_snake = Snake(start_position, start_direction_index, SNAKE_SIZE)
